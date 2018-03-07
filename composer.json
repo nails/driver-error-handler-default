@@ -1,6 +1,7 @@
 {
     "name": "nailsapp/driver-error-handler-default",
     "keywords": ["Nails", "Shed Collective", "CodeIgniter", "ErrorHandler", "Driver"],
+    "homepage": "",
     "description": "This is the default Error Handler for Nails",
     "license": "MIT",
     "authors":
