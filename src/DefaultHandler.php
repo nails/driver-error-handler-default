@@ -48,7 +48,7 @@ class DefaultHandler implements ErrorHandlerDriver
 
             $oErrorHandler = Factory::service('ErrorHandler');
 
-            if (!empty($oErrorHandler::LEVELS[$iErrorNumber])) {
+            if (array_key_exists($iErrorNumber, $oErrorHandler::LEVELS)) {
                 $aData['sSeverity'] = $oErrorHandler::LEVELS[$iErrorNumber];
             }
 
