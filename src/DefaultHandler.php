@@ -2,6 +2,7 @@
 
 namespace Nails\Common\ErrorHandler;
 
+use Nails\Common\Exception\NailsException;
 use Nails\Common\Interfaces\ErrorHandlerDriver;
 use Nails\Factory;
 
@@ -82,6 +83,7 @@ class DefaultHandler implements ErrorHandlerDriver
             'msg'  => $oException->getMessage(),
             'file' => $oException->getFile(),
             'line' => $oException->getLine(),
+            'url'  => $oException instanceof NailsException ? $oException->getDocumentationUrl() : null,
         ];
 
         $sSubject = $oDetails->msg;
