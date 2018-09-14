@@ -1,5 +1,5 @@
 {
-    "name": "nailsapp/driver-error-handler-default",
+    "name": "nails/driver-error-handler-default",
     "keywords": ["Nails", "Shed Collective", "CodeIgniter", "ErrorHandler", "Driver"],
     "homepage": "",
     "description": "This is the default Error Handler for Nails",
@@ -31,7 +31,7 @@
         "nails": {
             "name": "Default",
             "type": "driver",
-            "forModule": "nailsapp/common",
+            "forModule": "nails/common",
             "subType": "ErrorHandler",
             "data": {
                 "namespace": "Nails\\Common\\ErrorHandler\\",
