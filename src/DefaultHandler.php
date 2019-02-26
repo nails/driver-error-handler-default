@@ -10,6 +10,7 @@ class DefaultHandler implements ErrorHandlerDriver
 {
     /**
      * Instantiates the driver
+     *
      * @return void
      */
     public static function init()
@@ -59,10 +60,8 @@ class DefaultHandler implements ErrorHandlerDriver
 
         //  Show we log the item?
         if (function_exists('config_item') && config_item('log_threshold') != 0) {
-            log_message(
-                'error',
-                $aData['sMessage'] . ' (' . $aData['sFile'] . ':' . $aData['iLine'] . ')'
-            );
+            Factory::service('Logger')
+                ->line($aData['sMessage'] . ' (' . $aData['sFile'] . ':' . $aData['iLine'] . ')');
         }
     }
 
@@ -103,6 +102,7 @@ class DefaultHandler implements ErrorHandlerDriver
 
     /**
      * Catches fatal errors on shut down
+     *
      * @return void
      */
     public static function fatal()
