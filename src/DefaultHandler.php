@@ -89,13 +89,11 @@ class DefaultHandler implements ErrorHandlerDriver
         $sMessage = 'Uncaught Exception with code: ' . $oDetails->code;
 
         //  Show we log the item?
-        if (function_exists('config_item') && config_item('log_threshold') != 0) {
-            log_message('error', $sMessage);
-        }
+        Factory::service('Logger')
+            ->line($sMessage);
 
-        $oErrorHandler = Factory::service('ErrorHandler');
-        $oErrorHandler->sendDeveloperMail($sSubject, $sMessage);
-        $oErrorHandler->showFatalErrorScreen($sSubject, $sMessage, $oDetails);
+        Factory::service('ErrorHandler')
+            ->showFatalErrorScreen($sSubject, $sMessage, $oDetails);
     }
 
     // --------------------------------------------------------------------------
@@ -108,23 +106,19 @@ class DefaultHandler implements ErrorHandlerDriver
     public static function fatal()
     {
         $aError = error_get_last();
-
         if (!is_null($aError) && $aError['type'] === E_ERROR) {
-
-            $oDetails = (object) [
-                'type' => 'Fatal Error',
-                'code' => $aError['type'],
-                'msg'  => $aError['message'],
-                'file' => $aError['file'],
-                'line' => $aError['line'],
-            ];
-
-            $sSubject = 'Fatal Error';
-            $sMessage = $aError['message'] . ' in ' . $aError['file'] . ' on line ' . $aError['line'];
-
-            $oErrorHandler = Factory::service('ErrorHandler');
-            $oErrorHandler->sendDeveloperMail($sSubject, $sMessage);
-            $oErrorHandler->showFatalErrorScreen($sSubject, $sMessage, $oDetails);
+            Factory::service('ErrorHandler')
+                ->showFatalErrorScreen(
+                    'Fatal Error',
+                    $aError['message'] . ' in ' . $aError['file'] . ' on line ' . $aError['line'],
+                    (object) [
+                        'type' => 'Fatal Error',
+                        'code' => $aError['type'],
+                        'msg'  => $aError['message'],
+                        'file' => $aError['file'],
+                        'line' => $aError['line'],
+                    ]
+                );
         }
     }
 }
