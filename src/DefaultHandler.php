@@ -23,10 +23,10 @@ class DefaultHandler implements ErrorHandlerDriver
     /**
      * Called when a PHP error occurs
      *
-     * @param  int    $iErrorNumber The error number
-     * @param  string $sErrorString The error message
-     * @param  string $sErrorFile   The file where the error occurred
-     * @param  int    $iErrorLine   The line number where the error occurred
+     * @param int    $iErrorNumber The error number
+     * @param string $sErrorString The error message
+     * @param string $sErrorFile   The file where the error occurred
+     * @param int    $iErrorLine   The line number where the error occurred
      *
      * @return void
      */
@@ -70,7 +70,7 @@ class DefaultHandler implements ErrorHandlerDriver
     /**
      * Catches uncaught exceptions
      *
-     * @param  \Exception $oException The caught exception
+     * @param \Exception $oException The caught exception
      *
      * @return void
      */
