@@ -15,7 +15,6 @@ class DefaultHandler implements ErrorHandlerDriver
      */
     public static function init()
     {
-        //  Nothing to do, but interface requires this method be defined.
     }
 
     // --------------------------------------------------------------------------
@@ -70,11 +69,12 @@ class DefaultHandler implements ErrorHandlerDriver
     /**
      * Catches uncaught exceptions
      *
-     * @param \Exception $oException The caught exception
+     * @param \Exception $oException     The uncaught exception
+     * @param bool       $bHaltExecution Whether to show the error screen and halt execution
      *
      * @return void
      */
-    public static function exception($oException)
+    public static function exception($oException, $bHaltExecution = true)
     {
         $oDetails = (object) [
             'type' => get_class($oException),
@@ -92,8 +92,10 @@ class DefaultHandler implements ErrorHandlerDriver
         Factory::service('Logger')
             ->line($sMessage);
 
-        Factory::service('ErrorHandler')
-            ->showFatalErrorScreen($sSubject, $sMessage, $oDetails);
+        if ($bHaltExecution) {
+            Factory::service('ErrorHandler')
+                ->showFatalErrorScreen($sSubject, $sMessage, $oDetails);
+        }
     }
 
     // --------------------------------------------------------------------------
