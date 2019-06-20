@@ -86,7 +86,7 @@ class DefaultHandler implements ErrorHandlerDriver
         ];
 
         $sSubject = $oDetails->msg;
-        $sMessage = 'Uncaught Exception with code: ' . $oDetails->code;
+        $sMessage = 'Uncaught Exception: ' . $oDetails->code . ' ' . $oDetails->msg;
 
         //  Show we log the item?
         Factory::service('Logger')
