@@ -1,11 +1,16 @@
 {
     "name": "nails/driver-error-handler-default",
-    "keywords": ["Nails", "Shed Collective", "CodeIgniter", "ErrorHandler", "Driver"],
-    "homepage": "",
+    "keywords": [
+        "Nails",
+        "Shed Collective",
+        "CodeIgniter",
+        "ErrorHandler",
+        "Driver"
+    ],
+    "homepage": "http://nailsapp.co.uk/driver/error-handler/default",
     "description": "This is the default Error Handler for Nails",
     "license": "MIT",
-    "authors":
-    [
+    "authors": [
         {
             "name": "Pablo de la Pena",
             "email": "p@nailsapp.co.uk",
@@ -13,18 +18,17 @@
             "role": "Developer"
         }
     ],
-    "support":
-    {
+    "support": {
         "email": "hello@nailsapp.co.uk"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
-    "autoload":
-    {
-        "psr-4": {"Nails\\Common\\ErrorHandler\\": "src/"}
+    "autoload": {
+        "psr-4": {
+            "Nails\\Common\\ErrorHandler\\": "src/"
+        }
     },
-    "require-dev":
-    {
+    "require-dev": {
         "phpunit/phpunit": "7.*"
     },
     "extra": {
