@@ -86,7 +86,13 @@ class DefaultHandler implements ErrorHandlerDriver
         ];
 
         $sSubject = $oDetails->msg;
-        $sMessage = 'Uncaught Exception: ' . $oDetails->code . ' ' . $oDetails->msg;
+        $sMessage = sprintf(
+            'Uncaught Exception: %s %s; file: %s, line %s',
+            $oDetails->code,
+            $oDetails->msg,
+            $oDetails->file,
+            $oDetails->line
+        );
 
         //  Show we log the item?
         Factory::service('Logger')
@@ -109,6 +115,7 @@ class DefaultHandler implements ErrorHandlerDriver
     {
         $aError = error_get_last();
         if (!is_null($aError) && $aError['type'] === E_ERROR) {
+
             Factory::service('ErrorHandler')
                 ->showFatalErrorScreen(
                     'Fatal Error',
