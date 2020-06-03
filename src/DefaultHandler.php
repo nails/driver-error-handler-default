@@ -50,8 +50,6 @@ class DefaultHandler implements ErrorHandlerDriver
             'sSeverity' => 'Unknown',
         ];
 
-        d($aData);
-
         //  Should we show this error?
         if ((bool) ini_get('display_errors') && error_reporting() !== 0) {
 
