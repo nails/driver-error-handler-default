@@ -4,8 +4,14 @@ namespace Nails\Common\ErrorHandler;
 
 use Nails\Common\Exception\NailsException;
 use Nails\Common\Interfaces\ErrorHandlerDriver;
+use Nails\Common\Service\ErrorHandler;
 use Nails\Factory;
 
+/**
+ * Class DefaultHandler
+ *
+ * @package Nails\Common\ErrorHandler
+ */
 class DefaultHandler implements ErrorHandlerDriver
 {
     /**
@@ -44,16 +50,18 @@ class DefaultHandler implements ErrorHandlerDriver
             'sSeverity' => 'Unknown',
         ];
 
+        d($aData);
+
         //  Should we show this error?
         if ((bool) ini_get('display_errors') && error_reporting() !== 0) {
 
+            /** @var ErrorHandler $oErrorHandler */
             $oErrorHandler = Factory::service('ErrorHandler');
 
             if (array_key_exists($iErrorNumber, $oErrorHandler::LEVELS)) {
                 $aData['sSeverity'] = $oErrorHandler::LEVELS[$iErrorNumber];
             }
 
-            $oErrorHandler = Factory::service('ErrorHandler');
             $oErrorHandler->renderErrorView('php', $aData, true);
         }
 
@@ -99,8 +107,9 @@ class DefaultHandler implements ErrorHandlerDriver
             ->line($sMessage);
 
         if ($bHaltExecution) {
-            Factory::service('ErrorHandler')
-                ->showFatalErrorScreen($sSubject, $sMessage, $oDetails);
+            /** @var ErrorHandler $oErrorHandler */
+            $oErrorHandler = Factory::service('ErrorHandler');
+            $oErrorHandler->showFatalErrorScreen($sSubject, $sMessage, $oDetails);
         }
     }
 
@@ -116,7 +125,9 @@ class DefaultHandler implements ErrorHandlerDriver
         $aError = error_get_last();
         if (!is_null($aError) && $aError['type'] === E_ERROR) {
 
-            Factory::service('ErrorHandler')
+            /** @var ErrorHandler $oErrorHandler */
+            $oErrorHandler = Factory::service('ErrorHandler');
+            $oErrorHandler
                 ->showFatalErrorScreen(
                     'Fatal Error',
                     $aError['message'] . ' in ' . $aError['file'] . ' on line ' . $aError['line'],
