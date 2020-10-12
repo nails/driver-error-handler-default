@@ -93,9 +93,9 @@ class DefaultHandler implements ErrorHandlerDriver
 
         $sSubject = $oDetails->msg;
         $sMessage = sprintf(
-            'Uncaught Exception: %s %s; file: %s, line %s',
+            'Uncaught %s Exception: code %s; file: %s, line %s',
+            get_class($oException),
             $oDetails->code,
-            $oDetails->msg,
             $oDetails->file,
             $oDetails->line
         );
