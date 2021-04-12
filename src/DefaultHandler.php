@@ -42,6 +42,17 @@ class DefaultHandler implements ErrorHandlerDriver
             return;
         }
 
+        //  Ignore some errors
+        $aIgnore = [
+            //  The following come from CI and won't be fixed
+            'ini_set(): Use of mbstring.internal_encoding is deprecated',
+            'ini_set(): Use of iconv.internal_encoding is deprecated'
+        ];
+
+        if (in_array($sErrorString, $aIgnore)) {
+            return;
+        }
+
         $aData = [
             'iNumber'   => $iErrorNumber,
             'sMessage'  => $sErrorString,
