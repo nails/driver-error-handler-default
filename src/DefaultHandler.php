@@ -15,6 +15,17 @@ use Nails\Factory;
 class DefaultHandler implements ErrorHandlerDriver
 {
     /**
+     * An array of errors which should be ignored
+     */
+    const IGNORE = [
+        //  The following come from CI and won't be fixed
+        'ini_set(): Use of mbstring.internal_encoding is deprecated',
+        'ini_set(): Use of iconv.internal_encoding is deprecated',
+    ];
+
+    // --------------------------------------------------------------------------
+
+    /**
      * Instantiates the driver
      *
      * @return void
@@ -42,14 +53,7 @@ class DefaultHandler implements ErrorHandlerDriver
             return;
         }
 
-        //  Ignore some errors
-        $aIgnore = [
-            //  The following come from CI and won't be fixed
-            'ini_set(): Use of mbstring.internal_encoding is deprecated',
-            'ini_set(): Use of iconv.internal_encoding is deprecated'
-        ];
-
-        if (in_array($sErrorString, $aIgnore)) {
+        if (in_array($sErrorString, static::IGNORE)) {
             return;
         }
 
