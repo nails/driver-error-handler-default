@@ -21,6 +21,7 @@ class DefaultHandler implements ErrorHandlerDriver
         //  The following come from CI and won't be fixed
         'ini_set(): Use of mbstring.internal_encoding is deprecated',
         'ini_set(): Use of iconv.internal_encoding is deprecated',
+        'ctype_digit(): Argument of type null will be interpreted as string in the future',
     ];
 
     // --------------------------------------------------------------------------
