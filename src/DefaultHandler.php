@@ -49,11 +49,6 @@ class DefaultHandler implements ErrorHandlerDriver
      */
     public static function error($iErrorNumber, $sErrorString, $sErrorFile, $iErrorLine)
     {
-        //  Don't clog the logs up with strict notices
-        if ($iErrorNumber === E_STRICT) {
-            return;
-        }
-
         if (in_array($sErrorString, static::IGNORE)) {
             return;
         }
