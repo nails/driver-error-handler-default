@@ -111,6 +111,8 @@ class DefaultHandler implements ErrorHandlerDriver
             $oDetails->line
         );
 
+        $aTrace = $oException->getTrace();
+
         //  Show we log the item?
         Factory::service('Logger')
             ->line($sMessage);
@@ -118,7 +120,7 @@ class DefaultHandler implements ErrorHandlerDriver
         if ($bHaltExecution) {
             /** @var ErrorHandler $oErrorHandler */
             $oErrorHandler = Factory::service('ErrorHandler');
-            $oErrorHandler->showFatalErrorScreen($sSubject, $sMessage, $oDetails);
+            $oErrorHandler->showFatalErrorScreen($sSubject, $sMessage, $oDetails, $aTrace);
         }
     }
 
